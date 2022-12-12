@@ -46,9 +46,9 @@ The newly created feature toggle has two environments, `development` and `produc
 Once the client is set up and a feature toggle is created, generally the feature toggle is used as follow.
 ```go
 if featureToggleClient.IsEnabled(<NameOfFeatureToggle>) {
-	<NewFlow>
+	// new flow
 } else {
-	<OldFlow>
+	// old flow
 }
 ```
 # References
