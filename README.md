@@ -26,7 +26,7 @@ You also need to install Unleash Client SDK for Golang
 ```bash
 go get github.com/Unleash/unleash-client-go/v3
 ```
-In your service app, you need to create an Unleash client instance, specifying the url of Unleash server the client will connect to and API token. Typically, you may also want to specify some other options as well, like how often the client should hit the Unleash server to refresh the state of each feature toggles. By default, the refresh interval is 15 seconds. In the following example, you can set the refresh interval to 2 seconds only using `WithRefreshInterval` option.
+In your service app, you need to create an Unleash client instance, specifying the url of Unleash server the client will connect to and API token. Typically, you may also want to specify some other options as well, like how often the client should hit the Unleash server to refresh the state of each feature toggle. By default, the refresh interval is 15 seconds. In the following example, you can set the refresh interval to 2 seconds only using `WithRefreshInterval` option.
 ```go
 featureToggleClient, err := unleash.NewClient(
 	unleash.WithListener(&unleash.DebugListener{}),
@@ -39,11 +39,11 @@ if err != nil {
 	panic(err)
 }
 ```
-At this point, you need to create the feature toggle itself via Unleash Dashboard. The user interface is intuitive. Just click `New feature toggle` at the upper right, and give your feature toggle a name. A naming convention should be agreed by your organization. But for this example, you may name it simmply as `toggle`. It is also nice to specify the type of feature toggle, you may start with `Operational`.
+At this point, you need to create the feature toggle itself via Unleash Dashboard. The user interface is intuitive. Just click `New feature toggle` at the upper right, and give your feature toggle a name. A naming convention should be agreed by your organization. But for this example, you may name it simply as `toggle`. It is also nice to specify the type of feature toggle, you may start with `Operational`.
 
 The newly created feature toggle has two environments, `development` and `production`. To serve as an example, you will mostly deal with `development` environment. Click `Add strategy` to your development environment. There are some options available. For starter, you may try `Standard` first.
 
-Once the client and feature toggle are created, generally it is used as follow.
+Once the client is set up and a feature toggle is created, generally the feature toggle is used as follow.
 ```go
 if featureToggleClient.IsEnabled(<NameOfFeatureToggle>) {
 	<NewFlow>
