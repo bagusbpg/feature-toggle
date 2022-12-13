@@ -1,4 +1,4 @@
-module github.com/bagusbpg/featuretoggle
+module github.com/bagusbpg/feature-toggle
 
 go 1.19
 
