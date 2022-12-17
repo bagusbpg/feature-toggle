@@ -28,7 +28,7 @@ go get github.com/Unleash/unleash-client-go/v3
 ```
 In your service app, you need to create an Unleash client instance, specifying the url of Unleash server the client will connect to and API token. Typically, you may also want to specify some other options as well, like how often the client should hit the Unleash server to refresh the state of each feature toggle. By default, the refresh interval is 15 seconds. In the following example, you can set the refresh interval to 2 seconds only using `WithRefreshInterval` option.
 ```go
-featureToggleClient, err := unleash.NewClient(
+featureToggle, err := unleash.NewClient(
 	unleash.WithListener(&unleash.DebugListener{}),
 	unleash.WithAppName("my-application"),
 	unleash.WithUrl("http://localhost:4242/api/"),
@@ -45,12 +45,20 @@ The newly created feature toggle has two environments, `development` and `produc
 
 Once the client is set up and a feature toggle is created, generally the feature toggle is used as follow.
 ```go
-if featureToggleClient.IsEnabled(<NameOfFeatureToggle>) {
+if featureToggle.IsEnabled(<NameOfFeatureToggle>) {
 	// new flow
 } else {
 	// old flow
 }
 ```
+The simple working-example as a playground to try feature toggle is provided here. Assuming that you havel already installed local Unleash server, you just need to run
+```
+git clone git@github.com:bagusbpg/feature-toggle.git
+cd feature-toggle
+go get github.com/Unleash/unleash-client-go/v3
+go run main.go
+```
+Open your favorite browser and hit `localhost:8888/`. With feature toggle `toggle` is enabled, you will get `feature is enabled` printed on your browser. Otherwise, it will show `feature is disabled`.
 # References
 - Dive deeper to the available [documentations](https://docs.getunleash.io/) and [articles](https://www.getunleash.io/blog/feature-toggle-best-practices) by Unleash to uncover tips and best practices to implement feature toggle in your project.
 - Academic research [paper](https://arxiv.org/pdf/1907.06157.pdf) by Mahdavi-Hezaveh, R. et.al. about the use of feature toggle in industry.

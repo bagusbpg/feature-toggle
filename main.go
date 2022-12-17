@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	featureToggleClient, err := unleash.NewClient(
+	featureToggle, err := unleash.NewClient(
 		unleash.WithListener(&unleash.DebugListener{}),
 		unleash.WithAppName("my-application"),
 		unleash.WithUrl("http://localhost:4242/api/"),
@@ -21,7 +21,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		featureEnabled := featureToggleClient.IsEnabled("toggle")
+		featureEnabled := featureToggle.IsEnabled("toggle")
 		if featureEnabled {
 			fmt.Fprintf(w, "feature is enabled")
 		} else {
