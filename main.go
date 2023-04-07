@@ -20,6 +20,8 @@ func main() {
 		panic(err)
 	}
 
+	featureToggle.WaitForReady()
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		featureEnabled := featureToggle.IsEnabled("toggle")
 		if featureEnabled {
